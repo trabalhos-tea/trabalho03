@@ -3,7 +3,7 @@ class Appointments  extends Sequelize.Model {
     static init(sequelize) {
         super.init(
             {
-                appoinmentDate: Sequelize.DATE, 
+                appointmentDate: Sequelize.DATE, 
                 description: Sequelize.STRING,    
             },
             {
