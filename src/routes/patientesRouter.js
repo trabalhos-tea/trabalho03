@@ -6,3 +6,4 @@ module.exports = patientesRouter;
 
 patientesRouter.post("/searchPatientesByName", patientesController.searchPatientByName);
 patientesRouter.post("/newPatient", patientesController.newPatient);
+patientesRouter.put("/updatePatient/", patientesController.updatePatient);

@@ -43,6 +43,26 @@ module.exports = {
         }
     },
 
+    async updatePatient(req, res) {
+        const patientId = req.body.id;
+        const patient = req.body;
+        if (!patientId) res.status(400).json({ msg: "ID do vendedor vazio" });
+        else {
+            const patientExists = await Patients.findByPk(patientId);
+            if (!patientExists)
+                res.status(404).json({ msg: "Vendedor não encontrado." });
+            else {
+                if (patient.name || patient.email || patient.phone) {
+                    await Patients.update(patient, {
+                        where: { id: patientId },
+                    });
+                    return res.status(200).json({ msg: "Vendedor atualizado com sucesso." });
+                } else
+                    return res.status(400).json({ msg: "Campos obrigatórios não preenchidos" });
+            }
+        }
+    },
+
 
 
     
