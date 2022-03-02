@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+require("./database");
 const port = process.env.SYSTEM_PORT;
 
 app.use(express.json());
