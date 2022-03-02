@@ -1,8 +1,9 @@
 const Patients = require("../models/Patients");
+const Appointment = require("../models/Appointments");
 const Sequelize = require("sequelize");
 
 module.exports = {
- async searchPatientByName(req, res) {
+    async searchPatientByName(req, res) {
         const name = req.body.name;
         if (!name)
             res.status(400).json({ msg: "Parâmetro nome está vazio", });
@@ -63,7 +64,19 @@ module.exports = {
         }
     },
 
+    async searchPatientByPhysicianId(req, res) {
+        const physicianId = req.params.physicianId;
+        if (!physicianId)
+            res.status(400).json({ msg: "Campo medico vazio" });
+        const appointment = await Appointment.findAll({
+            where: { physicianId },
+        }).catch((error) => res.status(500).json({ msg: "Falha na conexão" }));
+        if (appointment) {
+            if (appointment == "")
+                res.status(404).json({ msg: "Não há pacientes para esse medico" });
+            else res.status(200).json({ appointment });
+        } else res.status(404).json({ msg: "Não foi possivel encontrar medicos" });
+    },
 
 
-    
 }
