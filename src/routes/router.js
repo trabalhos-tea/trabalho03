@@ -5,7 +5,6 @@ const appointmentsRouter = require("./appointmentsRouter");
 const router = express.Router();
 
 router.get("/", (req,res) => {
-    console.log("nada")
     res.send("It's working");
 });
 
