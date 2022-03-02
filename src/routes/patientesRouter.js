@@ -4,4 +4,5 @@ const patientesController = require("../controllers/patientController");
 
 module.exports = patientesRouter;
 
-patientesRouter.post("/searchPatientesByName", patientesController.searchSellerByName);
+patientesRouter.post("/searchPatientesByName", patientesController.searchPatientByName);
+patientesRouter.post("/newPatient", patientesController.newPatient);
