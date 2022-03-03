@@ -28,7 +28,7 @@ module.exports = {
             where: { email },
         });
         if (isPatientNew)
-            res.status(403).json({ msg: "Vendedor já foi cadastrado." });
+            res.status(403).json({ msg: "Paciente já foi cadastrado." });
         else {
             const patients = await Patients.create({
                 name,
@@ -47,17 +47,17 @@ module.exports = {
     async updatePatient(req, res) {
         const patientId = req.body.id;
         const patient = req.body;
-        if (!patientId) res.status(400).json({ msg: "ID do vendedor vazio" });
+        if (!patientId) res.status(400).json({ msg: "ID do Paciente vazio" });
         else {
             const patientExists = await Patients.findByPk(patientId);
             if (!patientExists)
-                res.status(404).json({ msg: "Vendedor não encontrado." });
+                res.status(404).json({ msg: "Paciente não encontrado." });
             else {
                 if (patient.name || patient.email || patient.phone) {
                     await Patients.update(patient, {
                         where: { id: patientId },
                     });
-                    return res.status(200).json({ msg: "Vendedor atualizado com sucesso." });
+                    return res.status(200).json({ msg: "Paciente atualizado com sucesso." });
                 } else
                     return res.status(400).json({ msg: "Campos obrigatórios não preenchidos" });
             }
